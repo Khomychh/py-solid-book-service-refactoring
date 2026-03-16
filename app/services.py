@@ -1,5 +1,3 @@
-from abc import ABC
-
 from app.displays import Display
 from app.models import Book
 from app.printers import Printer
