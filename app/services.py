@@ -7,7 +7,7 @@ from app.serializers import Serializer
 
 
 class SerializerService:
-    def __init__(self, serializers: dict[str, Serializer]):
+    def __init__(self, serializers: dict[str, Serializer]) -> None:
         self.serializers = serializers
 
     def get_serializer(self, serialize_type: str) -> Serializer:
@@ -21,7 +21,7 @@ class SerializerService:
 
 
 class PrinterService:
-    def __init__(self, printers: dict[str, Printer]):
+    def __init__(self, printers: dict[str, Printer]) -> None:
         self.printers = printers
 
     def get_printer(self, printer_type: str) -> Printer:
@@ -35,7 +35,7 @@ class PrinterService:
 
 
 class DisplayService:
-    def __init__(self, displays: dict[str, Display]):
+    def __init__(self, displays: dict[str, Display]) -> None:
         self.displays = displays
 
     def get_display(self, display_type: str) -> Display:
@@ -50,8 +50,11 @@ class DisplayService:
 
 class BookCommandService:
     def __init__(
-        self, services: dict[str, DisplayService | PrinterService | SerializerService]
-    ):
+        self,
+        services: dict[
+            str, DisplayService | PrinterService | SerializerService
+        ]
+    ) -> None:
         self.services = services
 
     def get_service(
@@ -61,7 +64,10 @@ class BookCommandService:
             raise ValueError(f"Unknown service type: {command}")
         return self.services[command]
 
-    def execute_command(self, book: Book, command: tuple[str, str]) -> None | str:
+    def execute_command(
+            self,
+            book: Book, command: tuple[str, str]
+    ) -> None | str:
         cmd, method_type = command
         service = self.get_service(cmd)
         return service.execute(book, method_type)
